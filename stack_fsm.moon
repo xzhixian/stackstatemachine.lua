@@ -32,14 +32,14 @@ updateState = =>
   -- 如果state 是一个可以执行的函数，那么执行这个函数
   return currentState(self) if type(currentState) == "function"
 
-  -- 如果 self 是一个 事件触发器，那么抛出事件
-  return self\emit("stack_fsm_update", currentState) if type(self.emit) == "function"
-
   -- 如果 self 上有通用的 stack fsm 的监听，那么调用这个事件监听方法
   return self\onStackFSMUpdate(currentState) if type(self.onStackFSMUpdate) == "function"
 
   -- 如果 self 上有 on 事件监听方法，那么调用这个事件监听方法
   return self["on#{currentState}"](self) if type(self["on#{currentState}"]) == "function"
+
+  -- 如果 self 是一个 事件触发器，那么抛出事件
+  return self\emit("stack_fsm_update", currentState) if type(self.emit) == "function"
 
   return
 
