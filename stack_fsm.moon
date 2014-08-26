@@ -27,6 +27,9 @@ getCurrentState = =>
 --- 执行当前状态
 updateState = =>
   currentState = self\getCurrentState!
+  --console.info "[stack_fsm::updateState] states:"
+  --console.dir rawget(@, IDENTIFIER)
+
   return if currentState == nil
 
   -- 如果state 是一个可以执行的函数，那么执行这个函数
